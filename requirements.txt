@@ -1,0 +1,6 @@
+flask~=2.1.1
+MarkupSafe~=2.1.1
+flask_bootstrap
+flask_wtf
+wtforms
+bootstrap_flask
