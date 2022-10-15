@@ -17,7 +17,7 @@ def login():
         return redirect('/index')
     
     error = '用户名或者密码错误'
-    return render_template('login.html', error)
+    return render_template('login.html', error=error)
 
 
 @app.route('/json')
