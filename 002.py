@@ -51,7 +51,6 @@ def edit():
     return 'modify'
 
 
-
 @app.route('/json')
 def json():
     return jsonify({'code': 200, 'data': [1, 2, 3]})
