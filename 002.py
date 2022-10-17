@@ -1,10 +1,10 @@
 from flask import Flask, render_template, jsonify, request, redirect
-
+from random import randint
 app = Flask(__name__)
 
 DATA_DICT = {
-    '1': {'name': 'Feix', 'age': 40},
-    '2': {'name': 'Daniel', 'age': 38}
+    1: {'name': 'Feix', 'age': 40},
+    2: {'name': 'Daniel', 'age': 38}
 }
 
 
@@ -28,26 +28,29 @@ def login():
     warning = '警告信息！'
     return render_template('login.html', error=error, warning=warning)
 
-@app.route('/edit')
-def edit():
-    nid = request.args.get('nid')
-    print(nid)
-    return 'edit'
-
-
-@app.route('/delete')
-def delete():
-    nid = request.args.get('nid')
-    print(nid)
-    del DATA_DICT[nid]
+@app.route('/add', methods=['GET', 'POST'])
+def add():
+    if request.method == 'GET':
+        return render_template('add.html')
+    name = request.form.get('name')
+    age = request.form.get('age')
+    DATA_DICT.update({randint(50, 100): {'name': name, 'age': age}})
     return redirect('/index')
 
 
 @app.route('/delete')
 def delete():
+    nid = request.args.get('nid', type=int)
+    del DATA_DICT[nid]
+    return redirect('/index')
+
+@app.route('/modify')
+def edit():
     nid = request.args.get('nid')
     print(nid)
-    return 'delete'
+    return 'modify'
+
+
 
 @app.route('/json')
 def json():

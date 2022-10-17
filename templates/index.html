@@ -24,12 +24,13 @@
                 <td>{{value.name}}</td>
                 <td>{{value.age}}</td>
                 <td>
-                    <a href="/edit?nid={{key}}">edit</a>
                     <a href="/delete?nid={{key}}">delete</a>
+                    <a href="/modify?nid={{key}}">modify</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <a href="/add">Add a new record</a>
 </body>
 </html>
