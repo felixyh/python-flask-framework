@@ -2,9 +2,17 @@ from flask import Flask, render_template, jsonify, request, redirect
 
 app = Flask(__name__)
 
+DATA_DICT = {
+    '1': {'name': 'Feix', 'age': 40},
+    '2': {'name': 'Daniel', 'age': 38}
+}
+
+
+
 @app.route('/index')
 def index():
-    return "首页"
+    data_dict = DATA_DICT
+    return render_template('index.html', data_dict=data_dict)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -17,7 +25,21 @@ def login():
         return redirect('/index')
     
     error = '用户名或者密码错误'
-    return render_template('login.html', error=error)
+    warning = '警告信息！'
+    return render_template('login.html', error=error, warning=warning)
+
+@app.route('/edit')
+def edit():
+    nid = request.args.get('nid')
+    print(nid)
+    return 'edit'
+
+@app.route('/delete')
+def delete():
+    nid = request.args.get('nid')
+    print(nid)
+    del DATA_DICT[nid]
+    return redirect('/index')
 
 
 @app.route('/json')
