@@ -33,6 +33,7 @@ def edit():
     nid = request.args.get('nid')
     print(nid)
     return 'edit'
+<<<<<<< HEAD
 
 @app.route('/delete')
 def delete():
@@ -40,7 +41,14 @@ def delete():
     print(nid)
     del DATA_DICT[nid]
     return redirect('/index')
+=======
+>>>>>>> e486f32cea0a95761d20ada6c2c8088ef717e518
 
+@app.route('/delete')
+def delete():
+    nid = request.args.get('nid')
+    print(nid)
+    return 'delete'
 
 @app.route('/json')
 def json():
