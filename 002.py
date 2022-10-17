@@ -7,13 +7,12 @@ DATA_DICT = {
     2: {'name': 'Daniel', 'age': 38}
 }
 
-
-
 @app.route('/index', endpoint='idx')
 def index():
     data_dict = DATA_DICT
     return render_template('index.html', data_dict=data_dict)
 
+@app.route("/", methods=['GET', 'POST'])
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -61,7 +60,6 @@ def modify():
     DATA_DICT[nid]['age'] = age
     #return redirect('/index')
     return redirect(url_for('idx'))
-
 
 
 @app.route('/json')
