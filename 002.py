@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, redirect
+from flask import Flask, render_template, jsonify, request, redirect, url_for
 from random import randint
 app = Flask(__name__)
 
@@ -9,7 +9,7 @@ DATA_DICT = {
 
 
 
-@app.route('/index')
+@app.route('/index', endpoint='idx')
 def index():
     data_dict = DATA_DICT
     return render_template('index.html', data_dict=data_dict)
@@ -44,11 +44,24 @@ def delete():
     del DATA_DICT[nid]
     return redirect('/index')
 
-@app.route('/modify')
-def edit():
+@app.route('/modify', methods=['GET', 'POST'])
+def modify():
     nid = request.args.get('nid')
-    print(nid)
-    return 'modify'
+    nid = int(nid)
+
+    if request.method == 'GET':
+        info = DATA_DICT[nid]
+        name = info['name']
+        age = info['age']
+        return render_template('/modify.html', name=name, age=age)
+    
+    name = request.form.get('name')
+    age = request.form.get('age')
+    DATA_DICT[nid]['name'] = name
+    DATA_DICT[nid]['age'] = age
+    #return redirect('/index')
+    return redirect(url_for('idx'))
+
 
 
 @app.route('/json')
