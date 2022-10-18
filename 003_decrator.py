@@ -1,4 +1,7 @@
+from functools import wraps
+
 def auth(func):
+    @wraps(func)
     def inner(*args, **kwargs):
         return func(*args, **kwargs)
     return inner
