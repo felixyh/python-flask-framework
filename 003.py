@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for
+from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
 from random import randint
 
 from flask import session
@@ -21,7 +21,7 @@ def index():
 
         data_dict = DATA_DICT
         return render_template('index.html', data_dict=data_dict, logsuccessmsg=logsuccessmsg)
-    errormsg = 'You are not logged in'
+    flash('You are not logged in')
     return redirect(url_for('login'))
 
 @app.route("/", methods=['GET', 'POST'])
