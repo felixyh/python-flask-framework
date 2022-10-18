@@ -33,7 +33,7 @@ def login():
     user = request.form.get('user')
     password = request.form.get('password')
     if user == 'felix' and password == 'novirus':
-        # add session
+        # add session, 'username' is the key defined, could be any , such as 'xxx'
         session['username'] = request.form.get('user')
         return redirect('/index')
     
