@@ -18,5 +18,9 @@
     <span style="color: yellowgreen;">{{warning}}</span>
     <span style="color: red;">{{error}}</span>
     <span style="color: red;">{{errormsg}}</span>
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+
 </body>
 </html>

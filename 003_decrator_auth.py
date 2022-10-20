@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for
+from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
 from random import randint
 
 from flask import session
@@ -22,7 +22,7 @@ def auth(func):
         if 'username' in session:
             logsuccessmsg =  f'Logged in as {session["username"]}'
             return func(*args, **kwargs)
-        errormsg = 'You are not logged in'
+        flash('You are not logged in')
         return redirect(url_for('login'))
     return inner
 
